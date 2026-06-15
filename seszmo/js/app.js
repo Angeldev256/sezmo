@@ -111,6 +111,26 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
+  const homeShowcaseStage = document.querySelector(".home-showcase-stage");
+  const homeShowcaseBg = document.querySelector(".home-showcase-bg video");
+  if (homeShowcaseStage || homeShowcaseBg) {
+    window.addEventListener(
+      "mousemove",
+      (event) => {
+        const x = event.clientX / window.innerWidth - 0.5;
+        const y = event.clientY / window.innerHeight - 0.5;
+        if (homeShowcaseStage) {
+          homeShowcaseStage.style.setProperty("--home-stage-y", `${x * 6}deg`);
+          homeShowcaseStage.style.setProperty("--home-stage-x", `${-y * 5}deg`);
+        }
+        if (homeShowcaseBg) {
+          homeShowcaseBg.style.transform = `translate3d(${x * -4}%, ${y * -4}%, 0) scale(1.12)`;
+        }
+      },
+      { passive: true }
+    );
+  }
+
   document.querySelectorAll(".filter-btn").forEach((button) => {
     button.addEventListener("click", () => {
       const filter = button.dataset.filter || "all";
