@@ -1,15 +1,15 @@
 :root {
-  --bg: #051413;
-  --bg-2: #041110;
-  --teal: #0d1212;
+  --bg: #000000;
+  --bg-2: #000000c6;
+  --teal: #000000;
   --teal-deep: #1d1d1d;
   --teal-soft: #1F1D1E;
   --accent: #E75613;
   --accent-2: #ff7b54;
   --ink: #ffffff;
   --muted: rgba(255, 255, 255, 0.68);
-  --panel: rgba(7, 31, 29, 0.86);
-  --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+  --panel: rgba(1, 7, 6, 0.899);
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.705);
   --radius: 8px;
 }
 
