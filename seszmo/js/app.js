@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const progressBar = document.getElementById("scroll-progress");
   const menuToggle = document.querySelector(".menu-toggle");
   const navMenu = document.getElementById("primary-menu");
+  const portraitArch = document.querySelector(".portrait-arch");
 
   document.querySelectorAll(`[data-page-link="${page}"]`).forEach((link) => {
     link.classList.add("active");
@@ -19,6 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
       progressBar.style.width = `${maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0}%`;
     }
     navbar?.classList.toggle("scrolled", scrollTop > 30);
+    if (portraitArch) {
+      const portraitMotion = Math.min((scrollTop / window.innerHeight) * 34, 34);
+      portraitArch.style.setProperty("--portrait-scroll", `${portraitMotion.toFixed(2)}px`);
+    }
   }
 
   updateScrollUI();

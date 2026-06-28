@@ -364,7 +364,9 @@ textarea {
 .portrait-arch {
   height: 560px;
   border-radius: 190px 190px 170px 170px;
-  animation: portraitFloat 5s ease-in-out infinite;
+  transform: translate3d(0, var(--portrait-scroll, 0px), 0);
+  transition: transform 260ms ease-out;
+  will-change: transform;
 }
 
 .portrait-arch img {
@@ -425,6 +427,30 @@ textarea {
 .home-tools {
   padding: 3.5rem 24px 5rem;
   background: var(--bg);
+}
+
+.home-section {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 5rem 0;
+}
+
+.home-section .cinematic-stats {
+  margin-top: 0;
+}
+
+.home-section > .service-card {
+  min-height: auto;
+}
+
+.home-section > .service-card h2 {
+  max-width: 760px;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.08;
+}
+
+.home-section > .service-card p:not(.section-label) {
+  max-width: 760px;
 }
 
 .tool-strip {
