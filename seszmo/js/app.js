@@ -159,6 +159,84 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  const projectModal = document.getElementById("project-modal");
+  if (projectModal) {
+    const modalMedia = document.getElementById("project-modal-media");
+    const modalCategory = document.getElementById("project-modal-category");
+    const modalTag = document.getElementById("project-modal-tag");
+    const modalTitle = document.getElementById("project-modal-title");
+    const modalDescription = document.getElementById("project-modal-description");
+    const modalMeta = document.getElementById("project-modal-meta");
+
+    function closeProjectModal() {
+      projectModal.hidden = true;
+      body.classList.remove("modal-open");
+    }
+
+    function openProjectModal(card) {
+      const title = card.querySelector(".project-info h3")?.textContent?.trim() || "Project";
+      const category = card.querySelector(".project-info span")?.textContent?.trim() || "Showcase";
+      const description = card.querySelector(".project-info p")?.textContent?.trim() || "";
+      const mediaNode = card.querySelector(".project-media img, .project-media video");
+      const sourceNode = mediaNode?.querySelector("source");
+      const mediaSrc = sourceNode?.src || mediaNode?.src || "";
+      const mediaType = mediaNode?.tagName?.toLowerCase() || "img";
+
+      modalCategory.textContent = category;
+      modalTag.textContent = "Featured project";
+      modalTitle.textContent = title;
+      modalDescription.textContent = description;
+      modalMeta.textContent = "Full project view with supporting details and media context.";
+
+      if (modalMedia) {
+        modalMedia.innerHTML = "";
+        if (mediaType === "video") {
+          const video = document.createElement("video");
+          video.autoplay = true;
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          const source = document.createElement("source");
+          source.src = mediaSrc;
+          source.type = "video/mp4";
+          video.appendChild(source);
+          modalMedia.appendChild(video);
+        } else {
+          const image = document.createElement("img");
+          image.src = mediaSrc;
+          image.alt = title;
+          modalMedia.appendChild(image);
+        }
+      }
+
+      projectModal.hidden = false;
+      body.classList.add("modal-open");
+    }
+
+    document.querySelectorAll(".project-view-btn").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        const card = button.closest(".project-card");
+        if (card) {
+          openProjectModal(card);
+        }
+      });
+    });
+
+    projectModal.querySelector("[data-close-modal]")?.addEventListener("click", closeProjectModal);
+    projectModal.querySelector(".project-modal-close")?.addEventListener("click", closeProjectModal);
+    projectModal.addEventListener("click", (event) => {
+      if (event.target === projectModal) {
+        closeProjectModal();
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !projectModal.hidden) {
+        closeProjectModal();
+      }
+    });
+  }
+
   initParticles("showcase-particles");
   initContactForm();
 });
